@@ -9,7 +9,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  places: PropTypes.array.isRequired,
+  places: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default App;

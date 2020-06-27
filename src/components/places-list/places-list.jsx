@@ -10,7 +10,7 @@ const PlacesList = (props) => {
 };
 
 PlacesList.propTypes = {
-  places: PropTypes.array.isRequired,
+  places: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default PlacesList;
