@@ -10,7 +10,7 @@ class PlacesList extends React.PureComponent {
   render() {
     const {places} = this.props;
     return <div className="cities__places-list places__list tabs__content">
-      {places.map((item, index) => <PlaceCard name={item.name} key={index + ` ` + item.name} />)}
+      {places.map((place, index) => <PlaceCard place={place} key={index + ` ` + place.name} />)}
     </div>;
   }
 }
