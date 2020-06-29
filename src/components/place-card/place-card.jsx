@@ -1,27 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const _getMark = (isMark) => {
+  if (isMark) {
+    return <div className="place-card__mark">
+      <span>Premium</span>
+    </div>;
+  } else {
+    return null;
+  }
+};
+
 const PlaceCard = (props) => {
-  const {place} = props;
+  const {place, cardOverHandler} = props;
   const {isPremium,
+    id,
     imageSrc,
     price,
     rating,
     name,
     type} = place;
 
-  const getMark = (isMark) => {
-    if (isMark) {
-      return <div className="place-card__mark">
-        <span>Premium</span>
-      </div>;
-    } else {
-      return null;
-    }
-  };
-
-  return <article className="cities__place-card place-card">
-    {getMark(isPremium)}
+  return <article className="cities__place-card place-card" onMouseOver={cardOverHandler} id={id}>
+    {_getMark(isPremium)}
     <div className="cities__image-wrapper place-card__image-wrapper">
       <a href="#">
         <img className="place-card__image" src={imageSrc} width="260" height="200" alt="Place image" />
@@ -55,8 +56,17 @@ const PlaceCard = (props) => {
 };
 
 PlaceCard.propTypes = {
-  place: PropTypes.object.isRequired,
-  // onHeadingClick: PropTypes.func
+  place: PropTypes.exact({
+    id: PropTypes.string,
+    isPremium: PropTypes.bool,
+    imageSrc: PropTypes.string,
+    price: PropTypes.number,
+    rating: PropTypes.number,
+    name: PropTypes.string,
+    type: PropTypes.string,
+    coordinates: PropTypes.arrayOf(PropTypes.number),
+  }),
+  cardOverHandler: PropTypes.func
 };
 
 export default PlaceCard;
