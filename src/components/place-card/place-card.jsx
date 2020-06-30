@@ -56,7 +56,7 @@ const PlaceCard = (props) => {
 };
 
 PlaceCard.propTypes = {
-  place: PropTypes.exact({
+  place: PropTypes.shape({
     id: PropTypes.string,
     isPremium: PropTypes.bool,
     imageSrc: PropTypes.string,
@@ -64,7 +64,6 @@ PlaceCard.propTypes = {
     rating: PropTypes.number,
     name: PropTypes.string,
     type: PropTypes.string,
-    coordinates: PropTypes.arrayOf(PropTypes.number),
   }),
   cardOverHandler: PropTypes.func
 };
