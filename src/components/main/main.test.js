@@ -1,10 +1,10 @@
 import React from 'react';
-import Main from './main.jsx';
+import {Main} from './main.jsx';
 import renderer from 'react-test-renderer';
 
 it(`Main коректно рендарится после перезапуска`, () => {
   const tree = renderer
-    .create(<Main/>)
+    .create(<Main sityName=''/>)
     .toJSON();
   expect(tree).toMatchSnapshot();
 }

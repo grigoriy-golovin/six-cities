@@ -5,8 +5,9 @@ import {ActionCreator} from "./../../reducer.js";
 
 
 const Locations = (props) => {
-  const {offers, onChangeSity} = props;
-  const sityArr = Array.from(new Set(offers.map((item) => item.city.name)));
+
+  const {sityArr, onChangeSity} = props;
+
   return <section className="locations container">
     <ul className="locations__list tabs__list">
       {sityArr.map((item) => {
@@ -21,13 +22,14 @@ const Locations = (props) => {
 };
 
 Locations.propTypes = {
-  offers: PropTypes.array.isRequired,
-  onChangeSity: PropTypes.func
+  sityArr: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onChangeSity: PropTypes.func.isRequired
 };
 
 const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
   // sity: state.sity,
-  offers: state.offers
+  sityArr: Array.from(new Set(state.offers.map((item) => item.city.name)))
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
