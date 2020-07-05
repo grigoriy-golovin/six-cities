@@ -5,9 +5,9 @@ const initialState = {
   offers,
 };
 
-const ActionCreator = {
+export const ActionCreator = {
   changeSity: (sityName) => ({
-    tupe: `CHANGE_SITY`,
+    type: `CHANGE_SITY`,
     payload: sityName,
   }),
 };

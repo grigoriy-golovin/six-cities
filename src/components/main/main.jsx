@@ -5,7 +5,8 @@ import Locations from "./../locations/locations.jsx";
 import Map from "./../map/map.jsx";
 import PlacesList from '../places-list/places-list.jsx';
 
-const Main = () => {
+const Main = (props) => {
+  const {sityName} = props;
   return <main className="page__main page__main--index">
     <h1 className="visually-hidden">Cities</h1>
     <div className="tabs">
@@ -15,7 +16,7 @@ const Main = () => {
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">312 places to stay in Amsterdam</b>
+          <b className="places__found">312 places to stay in {sityName}</b>
           <form className="places__sorting" action="#" method="get">
             <span className="places__sorting-caption">Sort by</span>
             <span className="places__sorting-type" tabIndex="0">
@@ -42,7 +43,18 @@ const Main = () => {
 };
 
 Main.propTypes = {
+  sityName: PropTypes.oneOf([`Amsterdam`, `Paris`, `Hamburg`, `Cologne`, `Dusseldorf`]),
 };
 
 
-export default Main;
+const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  sityName: state.sity,
+});
+
+// const mapDispatchToProps = (dispatch) => ({
+//   onCcdcrvervre: () => dispatch(ActionCreater.ckmcomvom()),
+//   onDeekvrpvro: () => dispatch(ActionCreater.wwdecevom())
+// });
+
+export {Main};
+export default connect(mapStsteToProps)(Main);

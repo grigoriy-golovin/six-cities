@@ -9,6 +9,7 @@ import {reducer} from "./reducer.js";
 const init = () => {
 
   const store = createStore(reducer);
+
   ReactDOM.render(<Provider store={store}>
     <App
       // places={offers}
