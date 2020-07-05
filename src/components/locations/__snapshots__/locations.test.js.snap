@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Locations коректно рендарится после перезапуска 1`] = `
+<section
+  className="locations container"
+>
+  <ul
+    className="locations__list tabs__list"
+  >
+    <li
+      className="locations__item"
+    >
+      <a
+        className="locations__item-link tabs__item"
+        href="#"
+        onClick={[Function]}
+      >
+        <span>
+          
+        </span>
+      </a>
+    </li>
+    <li
+      className="locations__item"
+    >
+      <a
+        className="locations__item-link tabs__item"
+        href="#"
+        onClick={[Function]}
+      >
+        <span>
+          
+        </span>
+      </a>
+    </li>
+  </ul>
+</section>
+`;

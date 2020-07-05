@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 
 it(`Main коректно рендарится после перезапуска`, () => {
   const tree = renderer
-    .create(<Main sityName=''/>)
+    .create(<Main sityName='Amsterdam'/>)
     .toJSON();
   expect(tree).toMatchSnapshot();
 }

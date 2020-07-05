@@ -6,15 +6,23 @@ import PlaceCard from './place-card.jsx';
 Enzyme.configure({adapter: new Adapter()});
 
 it(`клик по заголовку сработал`, () => {
-  const clickHandler = jest.fn();
+  const cardOverHandler = jest.fn();
   const placeCard = shallow(<PlaceCard
-    name=' '
-    onHeadingClick={clickHandler}
+    offer={{
+      isPremium: true,
+      id: 0,
+      previewImage: ``,
+      price: 0,
+      rating: 0,
+      description: ``,
+      type: ``
+    }}
+    cardOverHandler={jest.fn()}
   />);
 
-  const heading = placeCard.find(`.place-card__name`);
+  const heading = placeCard.find(`.place-card`);
   heading.simulate(`click`);
-  expect(clickHandler).toHaveBeenCalledTimes(1);
+  expect(cardOverHandler).toHaveBeenCalledTimes(1);
 });
 
 
