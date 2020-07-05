@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
+import {connect} from 'react-redux';
 
 class Map extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.offerCordsArr = props.places.map((item) => item.coordinates);
+    this.offerCordsArr = props.offers.map((item) => item.location);
   }
 
   render() {
@@ -39,16 +40,22 @@ class Map extends React.PureComponent {
 
     this.offerCordsArr.map((item) => {
       leaflet
-      .marker(item, {icon})
+      .marker([item.latitude, item.longitude], {icon})
       .addTo(map);
     });
   }
 
 }
 Map.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.shape({
+  offers: PropTypes.arrayOf(PropTypes.shape({
     coordinates: PropTypes.arrayOf(PropTypes.number),
   }))
 };
 
-export default Map;
+const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  // sity: state.sity,
+  offers: state.offers
+});
+
+export {Map};
+export default connect(mapStsteToProps)(Map);

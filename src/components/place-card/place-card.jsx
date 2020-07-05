@@ -12,20 +12,20 @@ const _getMark = (isMark) => {
 };
 
 const PlaceCard = (props) => {
-  const {place, cardOverHandler} = props;
-  const {isPremium,
+  const {offer, cardOverHandler} = props;
+  const {is_premium,
     id,
-    imageSrc,
+    preview_image,
     price,
     rating,
-    name,
-    type} = place;
+    description,
+    type} = offer;
 
   return <article className="cities__place-card place-card" onMouseOver={cardOverHandler} id={id}>
-    {_getMark(isPremium)}
+    {_getMark(is_premium)}
     <div className="cities__image-wrapper place-card__image-wrapper">
       <a href="#">
-        <img className="place-card__image" src={imageSrc} width="260" height="200" alt="Place image" />
+        <img className="place-card__image" src={preview_image} width="260" height="200" alt="Place image" />
       </a>
     </div>
     <div className="place-card__info">
@@ -43,12 +43,12 @@ const PlaceCard = (props) => {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: `${rating}%`}}></span>
+          <span style={{width: `${rating * 10}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#">{name}</a>
+        <a href="#">{description}</a>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>
@@ -56,13 +56,13 @@ const PlaceCard = (props) => {
 };
 
 PlaceCard.propTypes = {
-  place: PropTypes.shape({
-    id: PropTypes.string,
-    isPremium: PropTypes.bool,
-    imageSrc: PropTypes.string,
+  offer: PropTypes.shape({
+    id: PropTypes.number,
+    is_premium: PropTypes.bool,
+    preview_image: PropTypes.string,
     price: PropTypes.number,
     rating: PropTypes.number,
-    name: PropTypes.string,
+    description: PropTypes.string,
     type: PropTypes.string,
   }),
   cardOverHandler: PropTypes.func
