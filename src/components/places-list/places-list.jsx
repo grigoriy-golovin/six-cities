@@ -31,7 +31,7 @@ PlacesList.propTypes = {
 
 const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
   // sity: state.sity,
-  offers: state.offers
+  offers: state.offersForSity
 });
 
 

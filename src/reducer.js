@@ -1,24 +1,28 @@
 import offers from "./super-moke.js";
 
 const initialState = {
-  sity: `Amsterdam`,
+  city: `Amsterdam`,
   offers,
 };
 
 export const ActionCreator = {
-  changeSity: (sityName) => ({
+  changeCity: (sityName) => ({
     type: `CHANGE_SITY`,
     payload: sityName,
   }),
+
+  setOffersForSity: () => ({
+    type: `SET_OFFERS_FOR_SITY`,
+  })
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case `CHANGE_SITY` : return Object.assign({}, state, {
-      sity: action.payload,
+      city: action.payload,
     });
-    case `WEVRVERB` : return Object.assign({}, state, {
-
+    case `SET_OFFERS_FOR_SITY` : return Object.assign({}, state, {
+      offersForSity: state.offers.filter((item) => item.city.name === state.city)
     });
   }
   return state;
