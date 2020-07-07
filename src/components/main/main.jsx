@@ -6,7 +6,7 @@ import Map from "./../map/map.jsx";
 import PlacesList from '../places-list/places-list.jsx';
 
 const Main = (props) => {
-  const {cityName} = props;
+  const {cityName, offersForCity} = props;
   return <main className="page__main page__main--index">
     <h1 className="visually-hidden">Cities</h1>
     <div className="tabs">
@@ -16,7 +16,7 @@ const Main = (props) => {
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">312 places to stay in {cityName}</b>
+          <b className="places__found">{offersForCity.length} places to stay in {cityName}</b>
           <form className="places__sorting" action="#" method="get">
             <span className="places__sorting-caption">Sort by</span>
             <span className="places__sorting-type" tabIndex="0">
@@ -44,11 +44,13 @@ const Main = (props) => {
 
 Main.propTypes = {
   cityName: PropTypes.oneOf([`Amsterdam`, `Paris`, `Hamburg`, `Cologne`, `Dusseldorf`]),
+  offersForCity: PropTypes.arrayOf(PropTypes.object)
 };
 
 
 const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
   cityName: state.city,
+  offersForCity: state.offersForCity,
 });
 
 // const mapDispatchToProps = (dispatch) => ({

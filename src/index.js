@@ -8,7 +8,7 @@ import {reducer, ActionCreator} from "./reducer.js";
 const init = () => {
 
   const store = createStore(reducer);
-  store.dispatch(ActionCreator.setOffersForSity());
+  store.dispatch(ActionCreator.setOffersForCity());
   ReactDOM.render(<Provider store={store}>
     <App/>
   </Provider>,

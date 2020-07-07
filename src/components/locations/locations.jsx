@@ -6,13 +6,13 @@ import {ActionCreator} from "./../../reducer.js";
 
 const Locations = (props) => {
 
-  const {city, cityArr, onChangecity} = props;
+  const {city, cityArr, onChangeCity} = props;
 
   return <section className="locations container">
     <ul className="locations__list tabs__list">
       {cityArr.map((item) => {
         return <li className="locations__item" key={item}>
-          <a className={`locations__item-link tabs__item ${item === city && `tabs__item--active`}`} href="#" onClick={(evt) => onChangecity(item, evt)}>
+          <a className={`locations__item-link tabs__item ${item === city && `tabs__item--active`}`} href="#" onClick={(evt) => onChangeCity(item, evt)}>
             <span>{item}</span>
           </a>
         </li>;
@@ -24,7 +24,7 @@ const Locations = (props) => {
 Locations.propTypes = {
   city: PropTypes.string.isRequired,
   cityArr: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onChangecity: PropTypes.func.isRequired
+  onChangeCity: PropTypes.func.isRequired
 };
 
 const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -34,12 +34,12 @@ const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onChangecity: (cityName, evt) => {
+  onChangeCity: (cityName, evt) => {
     evt.preventDefault();
     document.querySelector(`.tabs__item--active`).classList.remove(`tabs__item--active`);
     evt.currentTarget.classList.add(`tabs__item--active`);
     dispatch(ActionCreator.changeCity(cityName));
-    dispatch(ActionCreator.setOffersForSity());
+    dispatch(ActionCreator.setOffersForCity());
   },
 });
 

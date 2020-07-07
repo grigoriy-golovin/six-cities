@@ -6,23 +6,23 @@ const initialState = {
 };
 
 export const ActionCreator = {
-  changeCity: (sityName) => ({
-    type: `CHANGE_SITY`,
-    payload: sityName,
+  changeCity: (cityName) => ({
+    type: `CHANGE_CITY`,
+    payload: cityName,
   }),
 
-  setOffersForSity: () => ({
-    type: `SET_OFFERS_FOR_SITY`,
+  setOffersForCity: () => ({
+    type: `SET_OFFERS_FOR_CITY`,
   })
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case `CHANGE_SITY` : return Object.assign({}, state, {
+    case `CHANGE_CITY` : return Object.assign({}, state, {
       city: action.payload,
     });
-    case `SET_OFFERS_FOR_SITY` : return Object.assign({}, state, {
-      offersForSity: state.offers.filter((item) => item.city.name === state.city)
+    case `SET_OFFERS_FOR_CITY` : return Object.assign({}, state, {
+      offersForCity: state.offers.filter((item) => item.city.name === state.city)
     });
   }
   return state;
