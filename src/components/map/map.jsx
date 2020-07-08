@@ -6,15 +6,17 @@ import {connect} from 'react-redux';
 class Map extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.offerCordsArr = this.props.offers.map((item) => item.location);
-    this.city = [52.38333, 4.9];
-
+    this.updataCity();
     this.icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
+  }
 
-    this.zoom = 12;
+  updataCity() {
+    this.offerCordsArr = this.props.offerCordsArr;
+    this.city = [this.props.cityCords.latitude, this.props.cityCords.longitude];
+    this.zoom = this.props.cityCords.zoom;
   }
 
   render() {
@@ -42,31 +44,32 @@ class Map extends React.PureComponent {
 
     this.offerCordsArr.map((item) => {
       leaflet
-      .marker([item.latitude, item.longitude], this.icon)
+      .marker([item.latitude, item.longitude], {icon: this.icon})
       .addTo(this.layerForMarker);
     });
   }
 
   componentDidUpdate() {
     this.layerForMarker.clearLayers();
-    this.offerCordsArr = this.props.offers.map((item) => item.location);
+    this.updataCity();
+    this.map.setView(this.city, this.zoom);
     this.offerCordsArr.map((item) => {
       leaflet
-      .marker([item.latitude, item.longitude], this.icon)
+      .marker([item.latitude, item.longitude], {icon: this.icon})
       .addTo(this.layerForMarker);
     });
   }
 
 }
 Map.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    coordinates: PropTypes.arrayOf(PropTypes.number),
-  }))
+  offerCordsArr: PropTypes.arrayOf(PropTypes.object),
+  cityCords: PropTypes.object.isRequired,
 };
 
 const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  // sity: state.sity,
-  offers: state.offersForCity
+  cityCords: state.offersForCity[0].city.location,
+  offerCordsArr: state.offersForCity.map((item) => item.location)
+
 });
 
 export {Map};
