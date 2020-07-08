@@ -6,7 +6,15 @@ import {connect} from 'react-redux';
 class Map extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.offerCordsArr = props.offers.map((item) => item.location);
+    this.offerCordsArr = this.props.offers.map((item) => item.location);
+    this.city = [52.38333, 4.9];
+
+    this.icon = leaflet.icon({
+      iconUrl: `img/pin.svg`,
+      iconSize: [30, 30]
+    });
+
+    this.zoom = 12;
   }
 
   render() {
@@ -16,32 +24,36 @@ class Map extends React.PureComponent {
   }
 
   componentDidMount() {
-
-    const city = [52.38333, 4.9];
-
-    const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
-    });
-
-    const zoom = 12;
-    const map = leaflet.map(`map`, {
-      center: city,
-      zoom,
+    this.map = leaflet.map(`map`, {
+      center: this.city,
+      zoom: this.zoom,
       zoomControl: false,
       marker: true
     });
-    map.setView(city, zoom);
+
+    this.map.setView(this.city, this.zoom);
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
     })
-    .addTo(map);
+    .addTo(this.map);
+
+    this.layerForMarker = leaflet.layerGroup().addTo(this.map);
 
     this.offerCordsArr.map((item) => {
       leaflet
-      .marker([item.latitude, item.longitude], {icon})
-      .addTo(map);
+      .marker([item.latitude, item.longitude], this.icon)
+      .addTo(this.layerForMarker);
+    });
+  }
+
+  componentDidUpdate() {
+    this.layerForMarker.clearLayers();
+    this.offerCordsArr = this.props.offers.map((item) => item.location);
+    this.offerCordsArr.map((item) => {
+      leaflet
+      .marker([item.latitude, item.longitude], this.icon)
+      .addTo(this.layerForMarker);
     });
   }
 
@@ -54,7 +66,7 @@ Map.propTypes = {
 
 const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
   // sity: state.sity,
-  offers: state.offers
+  offers: state.offersForCity
 });
 
 export {Map};
