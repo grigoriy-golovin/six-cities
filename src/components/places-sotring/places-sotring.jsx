@@ -36,10 +36,12 @@ class PlacesSorting extends React.PureComponent {
   }
 
   handlerOptionChange(evt) {
+    document.querySelector(`.places__option--active`).classList.remove(`places__option--active`);
+    evt.currentTarget.classList.add(`places__option--active`);
     const value = evt.currentTarget.textContent;
+    this.setSortingOption(value);
     this.setState({activeOptions: value});
     this.handlerSortType();
-    this.setSortingOption(value);
   }
 
 }
