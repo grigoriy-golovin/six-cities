@@ -6,9 +6,16 @@ import {connect} from 'react-redux';
 class Map extends React.PureComponent {
   constructor(props) {
     super(props);
+
     this.updataCity();
+
     this.icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
+      iconSize: [30, 30]
+    });
+
+    this.iconActive = leaflet.icon({
+      iconUrl: `img/pin-active.svg`,
       iconSize: [30, 30]
     });
   }
@@ -41,6 +48,7 @@ class Map extends React.PureComponent {
     .addTo(this.map);
 
     this.layerForMarker = leaflet.layerGroup().addTo(this.map);
+    // this.layerForMarkerActive = leaflet.layerGroup().addTo(this.map);
 
     this.offerCordsArr.map((item) => {
       leaflet
@@ -50,6 +58,7 @@ class Map extends React.PureComponent {
   }
 
   componentDidUpdate() {
+    const {cordsActiveMark} = this.props;
     this.layerForMarker.clearLayers();
     this.updataCity();
     this.map.setView(this.city, this.zoom);
@@ -58,18 +67,24 @@ class Map extends React.PureComponent {
       .marker([item.latitude, item.longitude], {icon: this.icon})
       .addTo(this.layerForMarker);
     });
+
+    leaflet
+    .marker([cordsActiveMark.latitude, cordsActiveMark.longitude], {icon: this.iconActive})
+    .addTo(this.layerForMarker);
+
   }
 
 }
 Map.propTypes = {
   offerCordsArr: PropTypes.arrayOf(PropTypes.object),
   cityCords: PropTypes.object.isRequired,
+  cordsActiveMark: PropTypes.object,
 };
 
 const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
   cityCords: state.offersForCity[0].city.location,
-  offerCordsArr: state.offersForCity.map((item) => item.location)
-
+  offerCordsArr: state.offersForCity.map((item) => item.location),
+  cordsActiveMark: state.cordsActiveMark,
 });
 
 export {Map};

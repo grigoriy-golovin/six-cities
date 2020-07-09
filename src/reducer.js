@@ -23,7 +23,11 @@ export const ActionCreator = {
       case `Top rated first`: return {type: `SORTING_FOR_RATED`};
     }
     return {type: `SORTING_FOR_ID`};
-  }
+  },
+  setActiveMark: (location) => ({
+    type: `SET_ACTIVE_MARK`,
+    payload: location,
+  })
 };
 
 export const reducer = (state = initialState, action) => {
@@ -45,6 +49,9 @@ export const reducer = (state = initialState, action) => {
     });
     case `SORTING_FOR_RATED` : return Object.assign({}, state, {
       offersForCity: Array.from(state.offersForCity).sort((a, b) => b.rating - a.rating)
+    });
+    case `SET_ACTIVE_MARK` : return Object.assign({}, state, {
+      cordsActiveMark: action.payload,
     });
   }
   return state;

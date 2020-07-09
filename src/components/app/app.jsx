@@ -20,8 +20,8 @@ const App = () => {
 // });
 
 // const mapDispatchToProps = (dispatch) => ({
-//   onCcdcrvervre: () => dispatch(ActionCreater.ckmcomvom()),
-//   onDeekvrpvro: () => dispatch(ActionCreater.wwdecevom())
+//   onCcdcrvervre: () => dispatch(ActionCreator.ckmcomvom()),
+//   onDeekvrpvro: () => dispatch(ActionCreator.wwdecevom())
 // });
 
 // export {App};

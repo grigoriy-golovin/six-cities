@@ -19,9 +19,10 @@ const PlaceCard = (props) => {
     price,
     rating,
     description,
-    type} = offer;
+    type,
+    location} = offer;
 
-  return <article className="cities__place-card place-card" onMouseOver={cardOverHandler} id={id}>
+  return <article className="cities__place-card place-card" onMouseOver={() => cardOverHandler(location)} id={id}>
     {_getMark(isPremium)}
     <div className="cities__image-wrapper place-card__image-wrapper">
       <a href="#">
@@ -64,6 +65,7 @@ PlaceCard.propTypes = {
     rating: PropTypes.number,
     description: PropTypes.string,
     type: PropTypes.string,
+    location: PropTypes.object,
   }),
   cardOverHandler: PropTypes.func
 };

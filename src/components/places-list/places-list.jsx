@@ -2,6 +2,8 @@ import React from 'react';
 import PlaceCard from './../place-card/place-card.jsx';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {ActionCreator} from "../../reducer.js";
+
 
 class PlacesList extends React.PureComponent {
 
@@ -10,16 +12,12 @@ class PlacesList extends React.PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {offers, setActiveMark} = this.props;
     return <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => <PlaceCard
         offer={offer}
         key={offer.id}
-        cardOverHandler={(evt) => {
-          evt.stopPropagation();
-          const id = evt.currentTarget.id;
-          this.setState({place: id});
-        }}
+        cardOverHandler={(location) => setActiveMark(location)}
       />)}
     </div>;
   }
@@ -27,14 +25,17 @@ class PlacesList extends React.PureComponent {
 
 PlacesList.propTypes = {
   offers: PropTypes.array.isRequired,
+  setActiveMark: PropTypes.func,
 };
 
 const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  // sity: state.sity,
   offers: state.offersForCity
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  setActiveMark: (location) => dispatch(ActionCreator.setActiveMark(location)),
+});
 
 export {PlacesList};
-export default connect(mapStsteToProps)(PlacesList);
+export default connect(mapStsteToProps, mapDispatchToProps)(PlacesList);
 
