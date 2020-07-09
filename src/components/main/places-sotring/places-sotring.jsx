@@ -6,7 +6,6 @@ class PlacesSorting extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      // isOpened: false,
       activeOptions: `Popular`
     };
   }
@@ -21,16 +20,21 @@ class PlacesSorting extends React.PureComponent {
         </svg>
       </span>
       <ul className="places__options places__options--custom">
-        <li className="places__option places__option--active" tabIndex="0">Popular</li>
-        <li className="places__option" tabIndex="0">Price: low to high</li>
-        <li className="places__option" tabIndex="0">Price: high to low</li>
-        <li className="places__option" tabIndex="0">Top rated first</li>
+        <li onClick={(evt) => this.handlerOptionChange(evt)} className="places__option places__option--active" tabIndex="0">Popular</li>
+        <li onClick={(evt) => this.handlerOptionChange(evt)} className="places__option" tabIndex="0">Price: low to high</li>
+        <li onClick={(evt) => this.handlerOptionChange(evt)} className="places__option" tabIndex="0">Price: high to low</li>
+        <li onClick={(evt) => this.handlerOptionChange(evt)} className="places__option" tabIndex="0">Top rated first</li>
       </ul>
     </form>;
   }
 
   handlerSortType() {
     document.querySelector(`.places__options`).classList.toggle(`places__options--opened`);
+  }
+
+  handlerOptionChange(evt) {
+    const value = evt.currentTarget.textContent;
+    this.setState({activeOptions: value});
   }
 
 }
