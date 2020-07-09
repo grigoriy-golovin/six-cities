@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import Locations from "./../locations/locations.jsx";
 import Map from "./../map/map.jsx";
 import PlacesList from '../places-list/places-list.jsx';
-import PlacesSorting from './places-sotring/places-sotring.jsx';
+import PlacesSorting from '../places-sotring/places-sotring.jsx';
 
 const Main = (props) => {
   const {cityName, offersForCity} = props;

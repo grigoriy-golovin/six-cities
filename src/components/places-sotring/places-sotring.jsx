@@ -1,6 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-// import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ActionCreator} from "../../reducer.js";
+
 
 class PlacesSorting extends React.PureComponent {
   constructor(props) {
@@ -8,6 +10,7 @@ class PlacesSorting extends React.PureComponent {
     this.state = {
       activeOptions: `Popular`
     };
+    this.setSortingOption = this.props.setSortingOption;
   }
 
   render() {
@@ -35,8 +38,23 @@ class PlacesSorting extends React.PureComponent {
   handlerOptionChange(evt) {
     const value = evt.currentTarget.textContent;
     this.setState({activeOptions: value});
+    this.handlerSortType();
+    this.setSortingOption(value);
   }
 
 }
 
-export default PlacesSorting;
+const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
+
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setSortingOption: (value) => dispatch(ActionCreator.setSortingOption(value)),
+});
+
+PlacesSorting.propTypes = {
+  setSortingOption: PropTypes.func.isRequired,
+};
+
+export {PlacesSorting};
+export default connect(mapStsteToProps, mapDispatchToProps)(PlacesSorting);

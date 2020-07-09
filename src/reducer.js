@@ -13,7 +13,17 @@ export const ActionCreator = {
 
   setOffersForCity: () => ({
     type: `SET_OFFERS_FOR_CITY`,
-  })
+  }),
+
+  setSortingOption: (value) => {
+    switch (value) {
+      case `Popular`: return {type: `SORTING_FOR_ID`};
+      case `Price: low to high`: return {type: `SORTING_FOR_PRICE_LOW`};
+      case `Price: high to low`: return {type: `SORTING_FOR_PRICE_HIGH`};
+      case `Top rated first`: return {type: `SORTING_FOR_RATED`};
+    }
+    return {type: `SORTING_FOR_ID`};
+  }
 };
 
 export const reducer = (state = initialState, action) => {
@@ -23,6 +33,18 @@ export const reducer = (state = initialState, action) => {
     });
     case `SET_OFFERS_FOR_CITY` : return Object.assign({}, state, {
       offersForCity: state.offers.filter((item) => item.city.name === state.city)
+    });
+    case `SORTING_FOR_ID` : return Object.assign({}, state, {
+      offersForCity: Array.from(state.offersForCity).sort((a, b) => a.id - b.id)
+    });
+    case `SORTING_FOR_PRICE_LOW` : return Object.assign({}, state, {
+      offersForCity: Array.from(state.offersForCity).sort((a, b) => a.price - b.price)
+    });
+    case `SORTING_FOR_PRICE_HIGH` : return Object.assign({}, state, {
+      offersForCity: Array.from(state.offersForCity).sort((a, b) => b.price - a.price)
+    });
+    case `SORTING_FOR_RATED` : return Object.assign({}, state, {
+      offersForCity: Array.from(state.offersForCity).sort((a, b) => b.rating - a.rating)
     });
   }
   return state;
