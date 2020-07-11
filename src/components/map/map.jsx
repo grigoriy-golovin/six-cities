@@ -16,7 +16,7 @@ class Map extends React.PureComponent {
 
     this.iconActive = leaflet.icon({
       iconUrl: `img/pin-active.svg`,
-      iconSize: [30, 30]
+      iconSize: [35, 35]
     });
   }
 
@@ -67,11 +67,11 @@ class Map extends React.PureComponent {
       .marker([item.latitude, item.longitude], {icon: this.icon})
       .addTo(this.layerForMarker);
     });
-
-    leaflet
-    .marker([cordsActiveMark.latitude, cordsActiveMark.longitude], {icon: this.iconActive})
-    .addTo(this.layerForMarker);
-
+    if (cordsActiveMark) {
+      leaflet
+      .marker([cordsActiveMark.latitude, cordsActiveMark.longitude], {icon: this.iconActive})
+      .addTo(this.layerForMarker);
+    }
   }
 
 }
