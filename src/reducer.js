@@ -1,5 +1,5 @@
 // import offers from "./super-moke.js";
-import api from "./api.js";
+// import api from "./api.js";
 
 const initialState = {
   city: `Amsterdam`,
@@ -36,10 +36,11 @@ export const ActionCreator = {
 };
 
 export const Operation = {
-  loadOffers: () => (dispatch) => {
+  loadOffers: () => (dispatch, _, api) => {
     return api.get(`/hotels`)
     .then((response) => {
       dispatch(ActionCreator.loadOffers(response.data));
+      dispatch(ActionCreator.setOffersForCity());
     });
   }
 };

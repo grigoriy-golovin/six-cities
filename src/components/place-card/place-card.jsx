@@ -15,7 +15,7 @@ const PlaceCard = (props) => {
   const {offer, cardOverHandler} = props;
   const {isPremium,
     id,
-    previewImage,
+    preview_image,
     price,
     rating,
     description,
@@ -26,7 +26,7 @@ const PlaceCard = (props) => {
     {_getMark(isPremium)}
     <div className="cities__image-wrapper place-card__image-wrapper">
       <a href="#">
-        <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
+        <img className="place-card__image" src={preview_image} width="260" height="200" alt="Place image" />
       </a>
     </div>
     <div className="place-card__info">

@@ -5,21 +5,23 @@ import {createStore, applyMiddleware} from "redux";
 import thunk from "redux-thunk";
 import {compose} from "recompose";
 import {Provider} from "react-redux";
-import {reducer, ActionCreator, Operation} from "./reducer.js";
+import {reducer, Operation} from "./reducer.js";
+import configureAPI from "./api.js";
 
-const init = () => {
-
+const init = async () => {
+  const api = configureAPI((...args) => store.dispatch(...args));
   const store = createStore(
       reducer,
       compose(
-          applyMiddleware(thunk),
+          applyMiddleware(thunk.withExtraArgument(api)),
           window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
       )
   );
 
-  store.dispatch(Operation.loadOffers());
-  store.dispatch(ActionCreator.setOffersForCity());
-  ReactDOM.render(<Provider store={store}>
+
+ await store.dispatch(Operation.loadOffers());
+
+ await ReactDOM.render(<Provider store={store}>
     <App/>
   </Provider>,
   document.querySelector(`#root`)
