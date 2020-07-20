@@ -1,8 +1,9 @@
-import offers from "./super-moke.js";
+// import offers from "./super-moke.js";
+import api from "./api.js";
 
 const initialState = {
   city: `Amsterdam`,
-  offers,
+  // offers,
 };
 
 export const ActionCreator = {
@@ -27,7 +28,20 @@ export const ActionCreator = {
   setActiveMark: (location) => ({
     type: `SET_ACTIVE_MARK`,
     payload: location,
+  }),
+  loadOffers: (offers) => ({
+    type: `LOAD_OFFERS`,
+    payload: offers
   })
+};
+
+export const Operation = {
+  loadOffers: () => (dispatch) => {
+    return api.get(`/hotels`)
+    .then((response) => {
+      dispatch(ActionCreator.loadOffers(response.data));
+    });
+  }
 };
 
 export const reducer = (state = initialState, action) => {
@@ -52,6 +66,9 @@ export const reducer = (state = initialState, action) => {
     });
     case `SET_ACTIVE_MARK` : return Object.assign({}, state, {
       cordsActiveMark: action.payload,
+    });
+    case `LOAD_OFFERS` : return Object.assign({}, state, {
+      offers: action.payload,
     });
   }
   return state;
