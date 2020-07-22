@@ -12,7 +12,7 @@ const configureAPI = (dispatch) => {
   const onSuccess = (response) => response;
 
   const onFail = (err) => {
-    if (err.response.status === 403) {
+    if (err.response.status === 401) {
       dispatch(ActionCreator.authorization(true));
     }
     return err;

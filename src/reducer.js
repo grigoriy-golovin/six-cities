@@ -1,7 +1,7 @@
 
 const initialState = {
   city: `Amsterdam`,
-  isAuthorizationRequired: false,
+  isAuthorizationRequired: true,
 };
 
 export const ActionCreator = {
