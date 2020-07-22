@@ -1,12 +1,19 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Main from './../main/main.jsx';
+import {Switch, Route} from "react-router-dom";
+import SingIn from './../sing-in/sing-in.jsx';
+import Header from './../header/header.jsx';
 
 // import {connect} from "react-redux";
 
 const App = () => {
-  return <div className="page page--gray page--main">
-    <Main/>
-  </div>;
+  return <Fragment>
+    <Header />
+    <Switch>
+      <Route path="/login" exact component={SingIn}/>
+      <Route path="/" exact component={Main}/>
+    </Switch>
+  </Fragment>;
 
 };
 

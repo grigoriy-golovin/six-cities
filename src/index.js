@@ -7,6 +7,7 @@ import {compose} from "recompose";
 import {Provider} from "react-redux";
 import {reducer, Operation} from "./reducer.js";
 import configureAPI from "./api.js";
+import {BrowserRouter} from "react-router-dom";
 
 const init = async () => {
   const api = configureAPI((...args) => store.dispatch(...args));
@@ -21,11 +22,14 @@ const init = async () => {
 
  await store.dispatch(Operation.loadOffers());
 
- await ReactDOM.render(<Provider store={store}>
-    <App/>
-  </Provider>,
-  document.querySelector(`#root`)
-  );
+ ReactDOM.render(
+   <Provider store={store}>
+     <BrowserRouter>
+       <App />
+     </BrowserRouter>
+   </Provider>,
+   document.querySelector(`#root`)
+ );
 };
 
 init();

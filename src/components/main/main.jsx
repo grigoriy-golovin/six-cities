@@ -8,29 +8,31 @@ import PlacesSorting from '../places-sotring/places-sotring.jsx';
 
 const Main = (props) => {
   const {cityName, offersForCity} = props;
-  return <main className="page__main page__main--index">
-    <h1 className="visually-hidden">Cities</h1>
-    <div className="tabs">
-      <Locations/>
-    </div>
-    <div className="cities">
-      <div className="cities__places-container container">
-        <section className="cities__places places">
-          <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">{offersForCity.length} places to stay in {cityName}</b>
-          <PlacesSorting/>
-          <PlacesList/>
-        </section>
-        <div className="cities__right-section">
-          <Map/>
+  return <div className="page page--gray page--main">
+    <main className="page__main page__main--index">
+      <h1 className="visually-hidden">Cities</h1>
+      <div className="tabs">
+        <Locations/>
+      </div>
+      <div className="cities">
+        <div className="cities__places-container container">
+          <section className="cities__places places">
+            <h2 className="visually-hidden">Places</h2>
+            <b className="places__found">{offersForCity.length} places to stay in {cityName}</b>
+            <PlacesSorting/>
+            <PlacesList/>
+          </section>
+          <div className="cities__right-section">
+            <Map/>
+          </div>
         </div>
       </div>
-    </div>
-  </main>;
+    </main>
+  </div>;
 };
 
 Main.propTypes = {
-  cityName: PropTypes.oneOf([`Amsterdam`, `Paris`, `Hamburg`, `Cologne`, `Dusseldorf`]),
+  cityName: PropTypes.oneOf([`Amsterdam`, `Paris`, `Hamburg`, `Cologne`, `Dusseldorf`, `Brussels`]),
   offersForCity: PropTypes.arrayOf(PropTypes.object)
 };
 

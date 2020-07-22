@@ -1,7 +1,7 @@
 import axios from "axios";
 import {ActionCreator} from "./reducer.js";
 
-const configreAPI = (dispatch) => {
+const configureAPI = (dispatch) => {
 
   const api = axios.create({
     baseURL: `https://htmlacademy-react-2.appspot.com/six-cities`,
@@ -12,9 +12,9 @@ const configreAPI = (dispatch) => {
   const onSuccess = (response) => response;
 
   const onFail = (err) => {
-    // if (err.response.status === 403) {
-    //   dispatch(ActionCreator.&&&&&);
-    // }
+    if (err.response.status === 403) {
+      dispatch(ActionCreator.authorization(true));
+    }
     return err;
   };
 
@@ -23,4 +23,4 @@ const configreAPI = (dispatch) => {
   return api;
 };
 
-export default configreAPI;
+export default configureAPI;

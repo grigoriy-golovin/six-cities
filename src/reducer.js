@@ -1,9 +1,7 @@
-// import offers from "./super-moke.js";
-// import api from "./api.js";
 
 const initialState = {
   city: `Amsterdam`,
-  // offers,
+  isAuthorizationRequired: false,
 };
 
 export const ActionCreator = {
@@ -32,6 +30,10 @@ export const ActionCreator = {
   loadOffers: (offers) => ({
     type: `LOAD_OFFERS`,
     payload: offers
+  }),
+  authorization: (isAuthorizationRequired) => ({
+    type: `AUTHORIZATION`,
+    peyload: isAuthorizationRequired,
   })
 };
 
@@ -70,6 +72,9 @@ export const reducer = (state = initialState, action) => {
     });
     case `LOAD_OFFERS` : return Object.assign({}, state, {
       offers: action.payload,
+    });
+    case `AUTHORIZATION` : return Object.assign({}, state, {
+      isAuthorizationRequired: action.payload,
     });
   }
   return state;
