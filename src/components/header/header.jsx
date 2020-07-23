@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
 const Header = (props) => {
-  const {isAuthorization} = props;
+  const {isAuthorization, userEmail} = props;
   return <header className="header">
     <div className="container">
       <div className="header__wrapper">
@@ -23,7 +23,7 @@ const Header = (props) => {
                 </div>
                 {isAuthorization
                   ?
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                  <span className="header__user-name user__name">{userEmail}</span>
                   :
                   <span className="header__login">Sign in</span>
                 }
@@ -38,10 +38,12 @@ const Header = (props) => {
 
 Header.propTypes = {
   isAuthorization: PropTypes.bool.isRequired,
+  userEmail: PropTypes.string.isRequired,
 };
 
 const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
   isAuthorization: state.isAuthorization,
+  userEmail: state.userData.email,
 });
 
 export {Header};
