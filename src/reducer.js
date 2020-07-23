@@ -34,7 +34,11 @@ export const ActionCreator = {
   authorization: (isAuthorization) => ({
     type: `AUTHORIZATION`,
     payload: isAuthorization,
-  })
+  }),
+  setUserData: (data) => ({
+    type: `SET_USER_DATA`,
+    payload: data,
+  }),
 };
 
 export const Operation = {
@@ -48,11 +52,25 @@ export const Operation = {
 
   checkedIsAuthorization: () => (dispatch, _, api) => {
     return api.get(`/login`)
-    .then(() => {
+    .then((response) => {
+      dispatch(ActionCreator.setUserData(response.data));
       dispatch(ActionCreator.authorization(true));
+
     })
-    .catch((err) => {
+    .catch(() => {
       // console.error(err);
+    });
+  },
+
+  login: (data) => (dispatch, _, api) => {
+    return api.post(`/login`,
+        {
+          email: data.email,
+          passworld: data.password,
+        }
+    ).then((response) => {
+      dispatch(ActionCreator.setUserData(response.data));
+      dispatch(ActionCreator.authorization(true));
     });
   }
 };
@@ -85,6 +103,9 @@ export const reducer = (state = initialState, action) => {
     });
     case `AUTHORIZATION` : return Object.assign({}, state, {
       isAuthorization: action.payload,
+    });
+    case `SET_USER_DATA` : return Object.assign({}, state, {
+      userData: action.payload,
     });
   }
   return state;
