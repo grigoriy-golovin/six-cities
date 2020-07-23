@@ -21,6 +21,7 @@ const init = async () => {
 
 
  await store.dispatch(Operation.loadOffers());
+ await store.dispatch(Operation.checkedIsAuthorization());
 
  ReactDOM.render(
    <Provider store={store}>

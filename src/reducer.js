@@ -1,7 +1,7 @@
 
 const initialState = {
   city: `Amsterdam`,
-  isAuthorizationRequired: true,
+  isAuthorization: false,
 };
 
 export const ActionCreator = {
@@ -31,9 +31,9 @@ export const ActionCreator = {
     type: `LOAD_OFFERS`,
     payload: offers
   }),
-  authorization: (isAuthorizationRequired) => ({
+  authorization: (isAuthorization) => ({
     type: `AUTHORIZATION`,
-    peyload: isAuthorizationRequired,
+    payload: isAuthorization,
   })
 };
 
@@ -43,6 +43,16 @@ export const Operation = {
     .then((response) => {
       dispatch(ActionCreator.loadOffers(response.data));
       dispatch(ActionCreator.setOffersForCity());
+    });
+  },
+
+  checkedIsAuthorization: () => (dispatch, _, api) => {
+    return api.get(`/login`)
+    .then(() => {
+      dispatch(ActionCreator.authorization(true));
+    })
+    .catch((err) => {
+      // console.error(err);
     });
   }
 };
@@ -74,7 +84,7 @@ export const reducer = (state = initialState, action) => {
       offers: action.payload,
     });
     case `AUTHORIZATION` : return Object.assign({}, state, {
-      isAuthorizationRequired: action.payload,
+      isAuthorization: action.payload,
     });
   }
   return state;

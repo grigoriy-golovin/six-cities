@@ -13,9 +13,9 @@ const configureAPI = (dispatch) => {
 
   const onFail = (err) => {
     if (err.response.status === 401) {
-      dispatch(ActionCreator.authorization(true));
+      dispatch(ActionCreator.authorization(false));
     }
-    return err;
+    throw err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);
