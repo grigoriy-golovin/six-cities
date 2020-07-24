@@ -2,6 +2,16 @@
 const initialState = {
   city: `Amsterdam`,
   isAuthorization: false,
+  userData: {
+    id: -1,
+    email: `notEmail`,
+    name: `notName`,
+    // eslint-disable-next-line camelcase
+    avatar_url: ``,
+    // eslint-disable-next-line camelcase
+    is_pro: false
+
+  }
 };
 
 export const ActionCreator = {
@@ -57,9 +67,7 @@ export const Operation = {
       dispatch(ActionCreator.authorization(true));
 
     })
-    .catch(() => {
-      // console.error(err);
-    });
+    .catch(() => {});
   },
 
   login: (data) => (dispatch, _, api) => {
