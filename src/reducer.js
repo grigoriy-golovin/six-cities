@@ -10,8 +10,8 @@ const initialState = {
     avatar_url: ``,
     // eslint-disable-next-line camelcase
     is_pro: false
-
-  }
+  },
+  // offers: [1, 2, 3],
 };
 
 export const ActionCreator = {
