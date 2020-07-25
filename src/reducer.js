@@ -65,7 +65,6 @@ export const Operation = {
     .then((response) => {
       dispatch(ActionCreator.setUserData(response.data));
       dispatch(ActionCreator.authorization(true));
-
     })
     .catch(() => {});
   },

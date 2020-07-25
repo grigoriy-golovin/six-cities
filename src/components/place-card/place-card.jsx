@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -60,7 +61,7 @@ PlaceCard.propTypes = {
   offer: PropTypes.shape({
     id: PropTypes.number,
     isPremium: PropTypes.bool,
-    previewImage: PropTypes.string,
+    preview_image: PropTypes.string,
     price: PropTypes.number,
     rating: PropTypes.number,
     description: PropTypes.string,
