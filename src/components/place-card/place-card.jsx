@@ -24,13 +24,13 @@ const PlaceCard = (props) => {
     type,
     location} = offer;
 
-  return <Link to={`/offer/${id}`}>
-    <article className="cities__place-card place-card" onMouseOver={() => cardOverHandler(location)} id={id}>
+  return (
+    <article className="cities__place-card place-card" id={id}>
       {_getMark(isPremium)}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={`/offer/${id}`} onMouseOver={() => cardOverHandler(location)}>
           <img className="place-card__image" src={preview_image} width="260" height="200" alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -52,12 +52,12 @@ const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`/offer/${id}`}> {title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
     </article>
-  </Link>;
+  );
 };
 
 PlaceCard.propTypes = {
