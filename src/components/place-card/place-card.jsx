@@ -2,6 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {ActionCreator} from '../../reducer';
+import {connect} from 'react-redux';
 
 const _getMark = (isMark) => {
   if (isMark) {
@@ -14,7 +16,7 @@ const _getMark = (isMark) => {
 };
 
 const PlaceCard = (props) => {
-  const {offer, cardOverHandler} = props;
+  const {offer, cardOverHandler, favoriteToggle} = props;
   const {is_premium: isPremium,
     id,
     preview_image,
@@ -46,6 +48,7 @@ const PlaceCard = (props) => {
               button
             `}
             type="button"
+            onClick={() => favoriteToggle(id)}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
@@ -80,7 +83,16 @@ PlaceCard.propTypes = {
     type: PropTypes.string,
     location: PropTypes.object,
   }),
-  cardOverHandler: PropTypes.func
+  cardOverHandler: PropTypes.func,
+  favoriteToggle: PropTypes.func,
 };
 
-export default PlaceCard;
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  favoriteToggle: (id) => dispatch(ActionCreator.favoriteToggle(id)),
+});
+
+export {PlaceCard};
+export default connect(mapStateToProps, mapDispatchToProps)(PlaceCard);

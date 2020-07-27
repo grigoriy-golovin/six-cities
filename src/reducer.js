@@ -45,6 +45,10 @@ export const ActionCreator = {
     type: `SET_USER_DATA`,
     payload: data,
   }),
+  favoriteToggle: (id) => ({
+    type: `FAVORITE_TOGGLE`,
+    payload: id,
+  })
 };
 
 export const Operation = {
@@ -111,6 +115,17 @@ export const reducer = (state = initialState, action) => {
     });
     case `SET_USER_DATA` : return Object.assign({}, state, {
       userData: action.payload,
+    });
+    case `FAVORITE_TOGGLE` : return Object.assign({}, state, {
+      offers: state.offers.map((offer) => {
+        if (offer.id === action.payload) {
+          return Object.assign({}, offer, {
+            // eslint-disable-next-line camelcase
+            is_favorite: !offer.is_favorite,
+          });
+        }
+        return offer;
+      })
     });
   }
   return state;
