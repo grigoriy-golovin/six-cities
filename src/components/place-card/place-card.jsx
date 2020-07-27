@@ -15,11 +15,12 @@ const _getMark = (isMark) => {
 
 const PlaceCard = (props) => {
   const {offer, cardOverHandler} = props;
-  const {isPremium,
+  const {is_premium: isPremium,
     id,
     preview_image,
     price,
     rating,
+    is_favorite: isFavorite,
     title,
     type,
     location} = offer;
@@ -38,7 +39,14 @@ const PlaceCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button
+            className={`
+              place-card__bookmark-button
+              ${isFavorite && `place-card__bookmark-button--active`}
+              button
+            `}
+            type="button"
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -63,7 +71,8 @@ const PlaceCard = (props) => {
 PlaceCard.propTypes = {
   offer: PropTypes.shape({
     id: PropTypes.number,
-    isPremium: PropTypes.bool,
+    is_premium: PropTypes.bool,
+    is_favorite: PropTypes.bool,
     preview_image: PropTypes.string,
     price: PropTypes.number,
     rating: PropTypes.number,
