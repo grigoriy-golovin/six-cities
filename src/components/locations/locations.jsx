@@ -39,7 +39,6 @@ const mapDispatchToProps = (dispatch) => ({
     document.querySelector(`.tabs__item--active`).classList.remove(`tabs__item--active`);
     evt.currentTarget.classList.add(`tabs__item--active`);
     dispatch(ActionCreator.changeCity(cityName));
-    dispatch(ActionCreator.setOffersForCity());
   },
 });
 

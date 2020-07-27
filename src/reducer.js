@@ -11,7 +11,6 @@ const initialState = {
     // eslint-disable-next-line camelcase
     is_pro: false
   },
-  // offers: [1, 2, 3],
 };
 
 export const ActionCreator = {
@@ -20,18 +19,15 @@ export const ActionCreator = {
     payload: cityName,
   }),
 
-  setOffersForCity: () => ({
-    type: `SET_OFFERS_FOR_CITY`,
-  }),
+  // setOffersForCity: () => ({
+  //   type: `SET_OFFERS_FOR_CITY`,
+  // }),
 
   setSortingOption: (value) => {
-    switch (value) {
-      case `Popular`: return {type: `SORTING_FOR_ID`};
-      case `Price: low to high`: return {type: `SORTING_FOR_PRICE_LOW`};
-      case `Price: high to low`: return {type: `SORTING_FOR_PRICE_HIGH`};
-      case `Top rated first`: return {type: `SORTING_FOR_RATED`};
-    }
-    return {type: `SORTING_FOR_ID`};
+    return {
+      type: `SORTING_OPTION`,
+      payload: value,
+    };
   },
   setActiveMark: (location) => ({
     type: `SET_ACTIVE_MARK`,
@@ -56,7 +52,7 @@ export const Operation = {
     return api.get(`/hotels`)
     .then((response) => {
       dispatch(ActionCreator.loadOffers(response.data));
-      dispatch(ActionCreator.setOffersForCity());
+      // dispatch(ActionCreator.setOffersForCity());
     });
   },
 
@@ -89,21 +85,21 @@ export const reducer = (state = initialState, action) => {
     case `CHANGE_CITY` : return Object.assign({}, state, {
       city: action.payload,
     });
-    case `SET_OFFERS_FOR_CITY` : return Object.assign({}, state, {
-      offersForCity: state.offers.filter((item) => item.city.name === state.city)
+    case `SORTING_OPTION` : return Object.assign({}, state, {
+      sortingOption: action.payload,
     });
-    case `SORTING_FOR_ID` : return Object.assign({}, state, {
-      offersForCity: Array.from(state.offersForCity).sort((a, b) => a.id - b.id)
-    });
-    case `SORTING_FOR_PRICE_LOW` : return Object.assign({}, state, {
-      offersForCity: Array.from(state.offersForCity).sort((a, b) => a.price - b.price)
-    });
-    case `SORTING_FOR_PRICE_HIGH` : return Object.assign({}, state, {
-      offersForCity: Array.from(state.offersForCity).sort((a, b) => b.price - a.price)
-    });
-    case `SORTING_FOR_RATED` : return Object.assign({}, state, {
-      offersForCity: Array.from(state.offersForCity).sort((a, b) => b.rating - a.rating)
-    });
+    // case `SORTING_FOR_ID` : return Object.assign({}, state, {
+    //   offersForCity: Array.from(state.offersForCity).sort((a, b) => a.id - b.id)
+    // });
+    // case `SORTING_FOR_PRICE_LOW` : return Object.assign({}, state, {
+    //   offersForCity: Array.from(state.offersForCity).sort((a, b) => a.price - b.price)
+    // });
+    // case `SORTING_FOR_PRICE_HIGH` : return Object.assign({}, state, {
+    //   offersForCity: Array.from(state.offersForCity).sort((a, b) => b.price - a.price)
+    // });
+    // case `SORTING_FOR_RATED` : return Object.assign({}, state, {
+    //   offersForCity: Array.from(state.offersForCity).sort((a, b) => b.rating - a.rating)
+    // });
     case `SET_ACTIVE_MARK` : return Object.assign({}, state, {
       cordsActiveMark: action.payload,
     });

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import {connect} from 'react-redux';
+import {offersForCitySelector} from "../../selectors/selector.js";
+
 
 class Map extends React.PureComponent {
   constructor(props) {
@@ -82,8 +84,8 @@ Map.propTypes = {
 };
 
 const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  cityCords: state.offersForCity[0].city.location,
-  offerCordsArr: state.offersForCity.map((item) => item.location),
+  cityCords: offersForCitySelector(state)[0].city.location,
+  offerCordsArr: offersForCitySelector(state).map((item) => item.location),
   cordsActiveMark: state.cordsActiveMark,
 });
 
