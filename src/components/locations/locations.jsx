@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "./../../reducer.js";
+import {uniqueCitySelector} from "../../selectors/selector.js";
 
 
 const Locations = (props) => {
@@ -29,7 +30,7 @@ Locations.propTypes = {
 
 const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
-  cityArr: Array.from(new Set(state.offers.map((item) => item.city.name)))
+  cityArr: uniqueCitySelector(state),
 
 });
 

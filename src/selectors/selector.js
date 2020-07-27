@@ -8,3 +8,14 @@ export const offersForCitySelector = createSelector(
     getCity,
     (offers, city) => offers.filter((item) => item.city.name === city)
 );
+
+export const favoritesSelector = createSelector(
+    getOffers,
+    (offers) => offers.filter((offer) => offer.is_favorite)
+);
+
+export const uniqueCitySelector = createSelector(
+    getOffers,
+    (offers) => Array.from(new Set(offers.map((item) => item.city.name)))
+);
+

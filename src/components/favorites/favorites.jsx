@@ -1,16 +1,35 @@
 import React, {Fragment} from "react";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
+import PlaceCard from "../place-card/place-card.jsx";
+import {favoritesSelector} from "../../selectors/selector.js";
 
 const Favorites = (props) => {
-  const { } = props;
+  const {offers} = props;
+  const cityArr = Array.from(new Set(offers.map((item) => item.city.name)));
   return <Fragment>
     <main className="page__main page__main--favorites">
       <div className="page__favorites-container container">
         <section className="favorites">
           <h1 className="favorites__title">Saved listing</h1>
           <ul className="favorites__list">
+            {cityArr.map((cityName) => {
+              return <li className="favorites__locations-items" key={cityName}>
+                <div className="favorites__locations locations locations--current">
+                  <div className="locations__item">
+                    <a className="locations__item-link" href="#">
+                      <span>{cityName}</span>
+                    </a>
+                  </div>
+                </div>
+                <div className="favorites__places">
+                  {offers.filter((offer) => offer.city.name === cityName).map((item) => {
+                    return <PlaceCard offer={item} key={item.id}/>;
+                  })}
+                </div>
+              </li>;
+            })}
             <li className="favorites__locations-items">
               <div className="favorites__locations locations locations--current">
                 <div className="locations__item">
@@ -141,12 +160,12 @@ const Favorites = (props) => {
 };
 
 Favorites.propTypes = {
-  // isAuthorization: PropTypes.bool.isRequired,
+  offers: PropTypes.array.isRequired,
   // userEmail: PropTypes.string.isRequired,
 };
 
 const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  // offers: selector(state),
+  offers: favoritesSelector(state),
   // userEmail: state.userData.email,
 });
 

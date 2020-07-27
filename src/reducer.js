@@ -19,10 +19,6 @@ export const ActionCreator = {
     payload: cityName,
   }),
 
-  // setOffersForCity: () => ({
-  //   type: `SET_OFFERS_FOR_CITY`,
-  // }),
-
   setSortingOption: (value) => {
     return {
       type: `SORTING_OPTION`,
@@ -92,18 +88,6 @@ export const reducer = (state = initialState, action) => {
     case `SORTING_OPTION` : return Object.assign({}, state, {
       sortingOption: action.payload,
     });
-    // case `SORTING_FOR_ID` : return Object.assign({}, state, {
-    //   offersForCity: Array.from(state.offersForCity).sort((a, b) => a.id - b.id)
-    // });
-    // case `SORTING_FOR_PRICE_LOW` : return Object.assign({}, state, {
-    //   offersForCity: Array.from(state.offersForCity).sort((a, b) => a.price - b.price)
-    // });
-    // case `SORTING_FOR_PRICE_HIGH` : return Object.assign({}, state, {
-    //   offersForCity: Array.from(state.offersForCity).sort((a, b) => b.price - a.price)
-    // });
-    // case `SORTING_FOR_RATED` : return Object.assign({}, state, {
-    //   offersForCity: Array.from(state.offersForCity).sort((a, b) => b.rating - a.rating)
-    // });
     case `SET_ACTIVE_MARK` : return Object.assign({}, state, {
       cordsActiveMark: action.payload,
     });
