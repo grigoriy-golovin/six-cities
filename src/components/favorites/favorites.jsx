@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-// import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 // import PropTypes from "prop-types";
 
@@ -133,9 +133,9 @@ const Favorites = (props) => {
       </div>
     </main>
     <footer className="footer container">
-      <a className="footer__logo-link" href="main.html">
+      <Link className="footer__logo-link" to={`/`}>
         <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-      </a>
+      </Link>
     </footer>
   </Fragment>;
 };
@@ -146,7 +146,7 @@ Favorites.propTypes = {
 };
 
 const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  // isAuthorization: state.isAuthorization,
+  // offers: selector(state),
   // userEmail: state.userData.email,
 });
 

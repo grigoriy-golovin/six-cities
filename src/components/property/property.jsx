@@ -2,16 +2,17 @@ import React from "react";
 // import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {ActionCreator} from '../../reducer';
 
 const Property = (props) => {
-  const {match, offers, isAuthorization} = props;
+  const {match, offers, isAuthorization, favoriteToggle} = props;
   const id = parseInt(match.params.id, 10);
   const offer = offers.find((item) => item.id === id);
   const {
     // city,
     images,
     title,
-    // is_favorite: isFavorite,
+    is_favorite: isFavorite,
     is_premium: isPremium,
     rating,
     type,
@@ -45,8 +46,16 @@ const Property = (props) => {
             <h1 className="property__name">
               {title}
             </h1>
-            <button className="property__bookmark-button button" type="button">
-              <svg className="property__bookmark-icon" width="31" height="33">
+            <button
+              className={`
+              property__bookmark-button
+                ${isFavorite && `property__bookmark-button--active`}
+                button
+              `}
+              type="button"
+              onClick={() => favoriteToggle(id)}
+            >
+              <svg className="property__bookmark-icon place-card__bookmark-icon" width="31" height="33">
                 <use xlinkHref="#icon-bookmark"></use>
               </svg>
               <span className="visually-hidden">To bookmarks</span>
@@ -289,6 +298,7 @@ Property.propTypes = {
   match: PropTypes.object.isRequired,
   offers: PropTypes.array.isRequired,
   isAuthorization: PropTypes.bool.isRequired,
+  favoriteToggle: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -296,7 +306,11 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   isAuthorization: state.isAuthorization,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  favoriteToggle: (id) => dispatch(ActionCreator.favoriteToggle(id)),
+});
+
 export {Property};
-export default connect(mapStateToProps)(Property);
+export default connect(mapStateToProps, mapDispatchToProps)(Property);
 
 
