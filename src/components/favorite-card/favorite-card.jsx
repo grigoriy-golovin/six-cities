@@ -16,7 +16,7 @@ const _getMark = (isMark) => {
 };
 
 const FavoriteCard = (props) => {
-  const {offer, cardOverHandler, favoriteToggle} = props;
+  const {offer, cardOverHandler, favoriteToggle, isAuthorization} = props;
   const {is_premium: isPremium,
     id,
     preview_image,
@@ -48,7 +48,7 @@ const FavoriteCard = (props) => {
               button
             `}
             type="button"
-            onClick={() => favoriteToggle(id)}
+            onClick={() => favoriteToggle(id, isAuthorization)}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
@@ -85,13 +85,15 @@ FavoriteCard.propTypes = {
   }),
   cardOverHandler: PropTypes.func,
   favoriteToggle: PropTypes.func,
+  isAuthorization: PropTypes.bool,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  isAuthorization: state.isAuthorization,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  favoriteToggle: (id) => dispatch(ActionCreator.favoriteToggle(id)),
+  favoriteToggle: (id, isAuthorization) => dispatch(ActionCreator.favoriteToggle(id, isAuthorization)),
 });
 
 export {FavoriteCard};

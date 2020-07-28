@@ -41,10 +41,21 @@ export const ActionCreator = {
     type: `SET_USER_DATA`,
     payload: data,
   }),
-  favoriteToggle: (id) => ({
-    type: `FAVORITE_TOGGLE`,
-    payload: id,
-  })
+  favoriteToggle: (id, isAuthorization) => {
+    if (isAuthorization) {
+      return {
+        type: `FAVORITE_TOGGLE`,
+        payload: id,
+      };
+    } else {
+      window.history.pushState(null, ``, `/login`);
+      window.history.go();
+      return {
+        type: `FAVORITE_TOGGLE`,
+        payload: null,
+      };
+    }
+  }
 };
 
 export const Operation = {

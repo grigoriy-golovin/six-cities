@@ -53,7 +53,7 @@ const Property = (props) => {
                 button
               `}
               type="button"
-              onClick={() => favoriteToggle(id)}
+              onClick={() => favoriteToggle(id, isAuthorization)}
             >
               <svg className="property__bookmark-icon place-card__bookmark-icon" width="31" height="33">
                 <use xlinkHref="#icon-bookmark"></use>
@@ -307,7 +307,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  favoriteToggle: (id) => dispatch(ActionCreator.favoriteToggle(id)),
+  favoriteToggle: (id, isAuthorization) => dispatch(ActionCreator.favoriteToggle(id, isAuthorization)),
 });
 
 export {Property};
