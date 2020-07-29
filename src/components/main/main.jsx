@@ -9,7 +9,12 @@ import {offersForCitySelector} from "../../selectors/selector.js";
 
 
 const Main = (props) => {
-  const {cityName, offersForCity} = props;
+  const {
+    cityName,
+    offersForCity,
+    offerCordsArr,
+    cityCords,
+  } = props;
   return <div className="page page--gray page--main">
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -26,7 +31,10 @@ const Main = (props) => {
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
-              <Map/>
+              <Map
+                cityCords={cityCords}
+                offerCordsArr={offerCordsArr}
+              />
             </section>
           </div>
         </div>
@@ -37,19 +45,18 @@ const Main = (props) => {
 
 Main.propTypes = {
   cityName: PropTypes.oneOf([`Amsterdam`, `Paris`, `Hamburg`, `Cologne`, `Dusseldorf`, `Brussels`]),
-  offersForCity: PropTypes.arrayOf(PropTypes.object)
+  offersForCity: PropTypes.arrayOf(PropTypes.object),
+  offerCordsArr: PropTypes.arrayOf(PropTypes.object),
+  cityCords: PropTypes.object.isRequired,
 };
 
 
 const mapStsteToProps = (state, ownProps) => Object.assign({}, ownProps, {
   cityName: state.city,
   offersForCity: offersForCitySelector(state),
+  offerCordsArr: offersForCitySelector(state).map((item) => item.location),
+  cityCords: offersForCitySelector(state)[0].city.location,
 });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   onCcdcrvervre: () => dispatch(ActionCreater.ckmcomvom()),
-//   onDeekvrpvro: () => dispatch(ActionCreater.wwdecevom())
-// });
 
 export {Main};
 export default connect(mapStsteToProps)(Main);
