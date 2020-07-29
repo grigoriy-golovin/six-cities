@@ -25,7 +25,9 @@ const Main = (props) => {
             <PlacesList/>
           </section>
           <div className="cities__right-section">
-            <Map/>
+            <section className="cities__map map">
+              <Map/>
+            </section>
           </div>
         </div>
       </div>

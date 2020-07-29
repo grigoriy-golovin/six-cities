@@ -12,12 +12,12 @@ class Map extends React.PureComponent {
     this.updataCity();
 
     this.icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: `/img/pin.svg`,
       iconSize: [30, 30]
     });
 
     this.iconActive = leaflet.icon({
-      iconUrl: `img/pin-active.svg`,
+      iconUrl: `/img/pin-active.svg`,
       iconSize: [35, 35]
     });
   }
@@ -29,9 +29,7 @@ class Map extends React.PureComponent {
   }
 
   render() {
-    return <section className="cities__map map">
-      <div id="map" style={{height: `100%`}}></div>
-    </section>;
+    return <div id="map" style={{height: `100%`}}></div>;
   }
 
   componentDidMount() {
