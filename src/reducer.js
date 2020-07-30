@@ -48,7 +48,7 @@ export const ActionCreator = {
         payload: id,
       };
     } else {
-      window.history.pushState(null, ``, `/login`);
+      window.history.pushState(null, ``, `/six-cities/login`);
       window.history.go();
       return {
         type: `FAVORITE_TOGGLE`,
