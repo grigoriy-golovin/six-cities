@@ -85,7 +85,7 @@ export const Operation = {
     ).then((response) => {
       dispatch(ActionCreator.setUserData(response.data));
       dispatch(ActionCreator.authorization(true));
-      window.history.pushState(null, ``, `/`);
+      window.history.pushState(null, ``, `/six-cities/`);
       window.history.go();
     });
   }
