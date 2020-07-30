@@ -10,12 +10,12 @@ class Map extends React.PureComponent {
     this.updataCity();
 
     this.icon = leaflet.icon({
-      iconUrl: `/public/img/pin.svg`,
+      iconUrl: `/six-cities/public/img/pin.svg`,
       iconSize: [30, 30]
     });
 
     this.iconActive = leaflet.icon({
-      iconUrl: `/public/img/pin-active.svg`,
+      iconUrl: `/six-cities/public/img/pin-active.svg`,
       iconSize: [35, 35]
     });
   }

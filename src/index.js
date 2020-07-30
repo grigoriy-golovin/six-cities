@@ -25,7 +25,7 @@ const init = async () => {
 
  ReactDOM.render(
    <Provider store={store}>
-     <BrowserRouter>
+     <BrowserRouter basename="/six-cities">
        <App />
      </BrowserRouter>
    </Provider>,
