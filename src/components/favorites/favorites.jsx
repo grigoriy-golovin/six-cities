@@ -1,14 +1,16 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import FavoriteCard from "../favorite-card/favorite-card.jsx";
 import {favoritesSelector} from "../../selectors/selector.js";
+import Header from './../header/header.jsx';
 
 const Favorites = (props) => {
   const {offers} = props;
   const cityArr = Array.from(new Set(offers.map((item) => item.city.name)));
-  return <Fragment>
+  return <div className="page">
+    <Header />
     {offers.length === 0 ?
       <main className="page__main page__main--favorites page__main--favorites-empty">
         <div className="page__favorites-container container">
@@ -53,7 +55,7 @@ const Favorites = (props) => {
         <img className="footer__logo" src="/six-cities/public/img/logo.svg" alt="6 cities logo" width="64" height="33" />
       </Link>
     </footer>
-  </Fragment>;
+  </div>;
 };
 
 Favorites.propTypes = {

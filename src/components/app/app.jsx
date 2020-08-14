@@ -7,7 +7,6 @@ import Property from '../property/property.jsx';
 
 // import {connect} from "react-redux";
 
-`перенёс Header из App на каждую страницу отдельно`
 const App = () => {
   return <Fragment>
     <Switch>
